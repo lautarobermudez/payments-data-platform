@@ -1,0 +1,16 @@
+# environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+# database dumps and local exports: never commit real data
+*.dump
+*.sql.gz
+*.bak
+exports/
+# editors / OS
+.vscode/
+.idea/
+.DS_Store

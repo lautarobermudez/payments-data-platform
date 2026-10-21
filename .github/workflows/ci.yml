@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: payments
+          POSTGRES_PASSWORD: payments
+          POSTGRES_DB: payments
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U payments -d payments"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://payments:payments@localhost:5432/payments
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Create schema and views
+        run: |
+          for f in db/01_schema.sql db/02_views.sql db/03_bi_views.sql db/04_treasury.sql; do
+            psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -q -f "$f"
+          done
+      - name: Regenerate the seed and check it matches the committed files
+        run: |
+          python seed/generate_seed.py
+          git diff --exit-code -- seed/data
+      - name: Load (dry-run, then commit, then again to prove idempotency)
+        run: |
+          python etl/load_seed.py
+          python etl/load_seed.py --apply
+          python etl/load_seed.py --apply
+      - name: Unit tests and data-quality rules
+        run: python -m unittest discover -s tests -v
