@@ -86,7 +86,7 @@ def main():
                 supplier = rnd.choice(suppliers)
                 method = rnd.choices(PAYMENT_METHODS, weights=[6, 3, 1, 1])[0]
                 age = (END - day).days
-                status = rnd.choices(STATUSES, weights=[1 if age < 25 else 0.05, 12, 0.3])[0]
+                status = rnd.choices(STATUSES, weights=[1 if age < 25 else 0.4, 12, 0.3])[0]
                 number = next_number[company]
                 next_number[company] += 1
                 paid_on = day + dt.timedelta(days=rnd.choice([0, 2, 7, 14, 30])) if status == 'pagada' else None

@@ -51,12 +51,12 @@ psql postgresql://payments:payments@localhost:5432/payments -f docs/queries/01_t
 The loader prints a report and refuses to commit when the database and the source files disagree:
 
 ```
-Reconciliation: line total in database = 75,016,726.43 | in file = 75,016,726.43
+Reconciliation: line total in database = 78,555,433.97 | in file = 78,555,433.97
 === Load report ===
   new suppliers                             40
-  orders loaded                            277
-  order lines loaded                       464
-  treasury movements loaded                421
+  orders loaded                            289
+  order lines loaded                       487
+  treasury movements loaded                414
 ```
 
 ## Repository layout
