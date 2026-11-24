@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: payments
       POSTGRES_DB: payments
     ports:
-      - "5432:5432"
+      - "${PG_PORT:-5432}:5432"      # set PG_PORT when 5432 is already taken on your machine
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U payments -d payments"]
       interval: 5s
