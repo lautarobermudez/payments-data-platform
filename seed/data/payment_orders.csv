@@ -9,7 +9,7 @@ Beta Foods S.A.,3,2026-01-12,Andes Alimentos S.A.,30000010142,Efectivo,pagada,20
 Beta Foods S.A.,4,2026-01-13,Sierra Distribuciones S.A.S.,30000011548,Transferencia,pagada,2026-01-15,2026-01-20,0149999738422483416012
 Gamma Logistics S.R.L.,3,2026-01-14,Andes Insumos S.A.,30000010843,Transferencia,pagada,2026-01-14,2026-01-21,0179999821650860755508
 Gamma Logistics S.R.L.,4,2026-01-14,Cuyo Seguros S.A.S.,30000011262,Echeq,pagada,2026-01-28,2026-01-21,
-Gamma Logistics S.R.L.,5,2026-01-15,Pampa Logistica S.R.L.,30000012102,Echeq,pagada,2026-01-17,2026-01-30,
+Gamma Logistics S.R.L.,5,2026-01-15,Quebrada Logistica S.R.L.,30000012102,Echeq,pagada,2026-01-17,2026-01-30,
 Beta Foods S.A.,5,2026-01-16,Sur Alimentos S.R.L.,30000012528,Transferencia,pagada,2026-01-30,2026-01-23,0279999718894787450616
 Beta Foods S.A.,6,2026-01-16,Sur Mantenimiento S.A.S.,30000010215,Echeq,pagada,2026-01-16,2026-02-15,
 Alpha Trading S.A.,3,2026-01-19,Delta Consultoria S.A.,30000011199,Echeq,pagada,2026-01-21,2026-01-19,
@@ -59,7 +59,7 @@ Alpha Trading S.A.,17,2026-02-27,Sierra Mantenimiento S.A.,30000010983,Transfere
 Alpha Trading S.A.,18,2026-03-02,Cuyo Packaging S.R.L.,30000010568,Transferencia,pagada,2026-04-01,2026-03-17,0149999775118690147618
 Alpha Trading S.A.,19,2026-03-02,Sierra Tecnologia S.A.,30000011408,Echeq,pagada,2026-03-16,2026-04-01,
 Alpha Trading S.A.,20,2026-03-04,Mar Energia S.R.L.,30000011059,Transferencia,pagada,2026-03-04,2026-03-19,0179999848584353947110
-Alpha Trading S.A.,21,2026-03-04,Pampa Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-04-03,2026-03-04,0279999718034576214588
+Alpha Trading S.A.,21,2026-03-04,Quebrada Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-04-03,2026-03-04,0279999718034576214588
 Beta Foods S.A.,23,2026-03-05,Sur Alimentos S.R.L.,30000012528,Echeq,anulada,,2026-03-20,
 Alpha Trading S.A.,22,2026-03-05,Sierra Distribuciones S.A.S.,30000011548,Transferencia,pagada,2026-03-19,2026-03-20,0149999738422483416012
 Alpha Trading S.A.,23,2026-03-05,Sur Mantenimiento S.A.S.,30000010215,Transferencia,pagada,2026-03-12,,0079999969847045583535
@@ -74,7 +74,7 @@ Beta Foods S.A.,25,2026-03-12,Cuyo Alimentos S.R.L.,30000010355,Transferencia,pe
 Alpha Trading S.A.,25,2026-03-13,Sur Distribuciones S.R.L.,30000012455,Pago online,pagada,2026-03-27,2026-03-28,
 Alpha Trading S.A.,26,2026-03-16,Sierra Insumos S.R.L.,30000010495,Efectivo,pagada,2026-04-15,2026-03-23,
 Gamma Logistics S.R.L.,24,2026-03-16,Patagonia Distribuciones S.A.,30000011610,Transferencia,pagada,2026-04-15,2026-03-16,0179999829671786735386
-Gamma Logistics S.R.L.,25,2026-03-17,Pampa Logistica S.R.L.,30000012102,Echeq,pagada,2026-03-17,2026-04-16,
+Gamma Logistics S.R.L.,25,2026-03-17,Quebrada Logistica S.R.L.,30000012102,Echeq,pagada,2026-03-17,2026-04-16,
 Beta Foods S.A.,26,2026-03-17,Delta Distribuciones S.R.L.,30000011122,Transferencia,pagada,2026-03-24,2026-03-17,0079999929321387247587
 Alpha Trading S.A.,27,2026-03-19,Sierra Consultoria S.R.L.,30000011890,Echeq,pagada,2026-04-18,2026-03-19,
 Alpha Trading S.A.,28,2026-03-19,Sur Insumos S.A.,30000011963,Transferencia,pagada,2026-03-26,2026-04-18,0279999750482382676517
@@ -96,13 +96,13 @@ Beta Foods S.A.,31,2026-04-02,Litoral Insumos S.A.S.,30000010630,Echeq,pagada,20
 Gamma Logistics S.R.L.,31,2026-04-03,Sierra Transporte S.A.,30000011335,Echeq,pagada,2026-04-03,2026-04-18,
 Beta Foods S.A.,32,2026-04-03,Litoral Insumos S.A.S.,30000010630,Efectivo,pagada,2026-05-03,,
 Gamma Logistics S.R.L.,32,2026-04-06,Andes Seguros S.R.L.,30000012730,Pago online,pagada,2026-04-06,2026-04-13,
-Gamma Logistics S.R.L.,33,2026-04-06,Pampa Logistica S.R.L.,30000012102,Transferencia,pagada,2026-05-06,2026-04-21,0119999647687711579910
+Gamma Logistics S.R.L.,33,2026-04-06,Quebrada Logistica S.R.L.,30000012102,Transferencia,pagada,2026-05-06,2026-04-21,0119999647687711579910
 Beta Foods S.A.,33,2026-04-07,Litoral Insumos S.A.S.,30000010630,Transferencia,pagada,2026-04-07,2026-05-07,0729999722569137412273
 Gamma Logistics S.R.L.,34,2026-04-07,Sierra Mantenimiento S.A.,30000010983,Transferencia,pagada,2026-04-21,2026-04-14,0119999656236997003288
 Gamma Logistics S.R.L.,35,2026-04-08,Andes Insumos S.A.,30000010843,Echeq,pagada,2026-04-15,2026-04-08,
-Alpha Trading S.A.,34,2026-04-08,Pampa Transporte S.R.L.,30000011750,Echeq,pagada,2026-04-15,,
+Alpha Trading S.A.,34,2026-04-08,Quebrada Transporte S.R.L.,30000011750,Echeq,pagada,2026-04-15,,
 Beta Foods S.A.,34,2026-04-09,Andes Seguros S.A.S.,30000012382,Transferencia,pagada,2026-04-11,,0079999943683223308842
-Gamma Logistics S.R.L.,36,2026-04-10,Pampa Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-04-17,,0279999718034576214588
+Gamma Logistics S.R.L.,36,2026-04-10,Quebrada Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-04-17,,0279999718034576214588
 Beta Foods S.A.,35,2026-04-10,Sierra Distribuciones S.A.,30000012595,Echeq,pendiente,,2026-04-17,
 Gamma Logistics S.R.L.,37,2026-04-13,Sierra Insumos S.R.L.,30000010495,Echeq,pagada,2026-04-20,2026-04-20,
 Gamma Logistics S.R.L.,38,2026-04-14,Sur Energia S.A.S.,30000010916,Echeq,pagada,2026-05-14,,
@@ -120,7 +120,7 @@ Alpha Trading S.A.,40,2026-04-22,Litoral Insumos S.A.S.,30000010630,Transferenci
 Gamma Logistics S.R.L.,43,2026-04-22,Patagonia Servicios S.A.S.,30000012179,Transferencia,pagada,2026-04-29,2026-05-22,0279999793175314952355
 Gamma Logistics S.R.L.,44,2026-04-22,Andes Alimentos S.A.,30000010142,Efectivo,pagada,2026-04-22,2026-05-22,
 Gamma Logistics S.R.L.,45,2026-04-23,Rio Insumos S.A.,30000012039,Transferencia,pagada,2026-05-23,,0729999750246372172483
-Beta Foods S.A.,37,2026-04-24,Pampa Transporte S.R.L.,30000011750,Transferencia,pagada,2026-05-08,2026-05-01,0279999732151973912845
+Beta Foods S.A.,37,2026-04-24,Quebrada Transporte S.R.L.,30000011750,Transferencia,pagada,2026-05-08,2026-05-01,0279999732151973912845
 Beta Foods S.A.,38,2026-04-28,Mar Transporte S.R.L.,30000011475,Echeq,pagada,2026-04-28,,
 Gamma Logistics S.R.L.,46,2026-04-28,Sur Alimentos S.R.L.,30000012528,Echeq,pagada,2026-05-05,2026-05-05,
 Alpha Trading S.A.,41,2026-04-29,Sur Alimentos S.R.L.,30000012528,Transferencia,pagada,2026-05-13,2026-05-14,0279999718894787450616
@@ -131,7 +131,7 @@ Alpha Trading S.A.,42,2026-05-04,Patagonia Distribuciones S.A.,30000011610,Trans
 Beta Foods S.A.,41,2026-05-04,Patagonia Servicios S.A.S.,30000012179,Pago online,pagada,2026-05-11,2026-06-03,
 Beta Foods S.A.,42,2026-05-05,Norte Servicios S.A.,30000010282,Efectivo,pagada,2026-05-19,2026-05-12,
 Gamma Logistics S.R.L.,48,2026-05-05,Andes Alimentos S.A.,30000010142,Echeq,pagada,2026-06-04,2026-05-05,
-Gamma Logistics S.R.L.,49,2026-05-07,Pampa Transporte S.R.L.,30000011750,Pago online,pagada,2026-05-21,2026-05-07,
+Gamma Logistics S.R.L.,49,2026-05-07,Quebrada Transporte S.R.L.,30000011750,Pago online,pagada,2026-05-21,2026-05-07,
 Alpha Trading S.A.,43,2026-05-07,Sierra Distribuciones S.A.S.,30000011548,Pago online,pagada,2026-05-14,2026-05-07,
 Beta Foods S.A.,43,2026-05-07,Sur Energia S.A.S.,30000010916,Transferencia,pagada,2026-05-07,2026-06-06,0729999779599912014574
 Beta Foods S.A.,44,2026-05-08,Sierra Mantenimiento S.A.,30000010983,Echeq,pagada,2026-05-10,2026-06-07,
@@ -175,12 +175,12 @@ Beta Foods S.A.,53,2026-06-19,Litoral Packaging S.A.,30000011688,Transferencia,p
 Alpha Trading S.A.,56,2026-06-23,Mar Transporte S.R.L.,30000011475,Echeq,pagada,2026-07-07,2026-07-23,
 Alpha Trading S.A.,57,2026-06-23,Andes Insumos S.A.,30000010843,Transferencia,pagada,2026-07-23,2026-07-08,0179999821650860755508
 Beta Foods S.A.,54,2026-06-23,Andes Insumos S.A.,30000010843,Transferencia,pagada,2026-06-30,,0179999821650860755508
-Gamma Logistics S.R.L.,66,2026-06-25,Pampa Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-07-25,2026-07-02,0279999718034576214588
+Gamma Logistics S.R.L.,66,2026-06-25,Quebrada Distribuciones S.R.L.,30000010428,Transferencia,pagada,2026-07-25,2026-07-02,0279999718034576214588
 Gamma Logistics S.R.L.,67,2026-06-26,Mar Energia S.R.L.,30000011059,Transferencia,pagada,2026-06-26,2026-07-03,0179999848584353947110
 Alpha Trading S.A.,58,2026-06-26,Andes Insumos S.A.,30000010843,Transferencia,pagada,2026-07-10,2026-07-03,0179999821650860755508
 Gamma Logistics S.R.L.,68,2026-06-30,Litoral Seguros S.R.L.,30000012315,Echeq,pagada,2026-07-02,2026-06-30,
 Beta Foods S.A.,55,2026-06-30,Delta Consultoria S.R.L.,30000011823,Transferencia,pagada,2026-07-30,2026-06-30,0119999680193153729545
-Alpha Trading S.A.,59,2026-06-30,Pampa Transporte S.R.L.,30000011750,Efectivo,pagada,2026-07-02,2026-07-30,
+Alpha Trading S.A.,59,2026-06-30,Quebrada Transporte S.R.L.,30000011750,Efectivo,pagada,2026-07-02,2026-07-30,
 Gamma Logistics S.R.L.,69,2026-07-01,Delta Consultoria S.R.L.,30000011823,Echeq,pagada,2026-07-15,2026-07-31,
 Beta Foods S.A.,56,2026-07-02,Patagonia Distribuciones S.A.,30000011610,Efectivo,pagada,2026-07-02,2026-07-09,
 Alpha Trading S.A.,60,2026-07-03,Litoral Packaging S.A.,30000011688,Transferencia,pagada,2026-07-05,,0279999723870465862306
@@ -193,7 +193,7 @@ Beta Foods S.A.,57,2026-07-10,Sur Mantenimiento S.A.S.,30000010215,Efectivo,paga
 Beta Foods S.A.,58,2026-07-13,Sur Mantenimiento S.A.S.,30000010215,Transferencia,pagada,2026-07-15,2026-07-20,0079999969847045583535
 Gamma Logistics S.R.L.,72,2026-07-14,Sierra Distribuciones S.A.S.,30000011548,Transferencia,pagada,2026-08-13,2026-07-21,0149999738422483416012
 Gamma Logistics S.R.L.,73,2026-07-15,Mar Transporte S.R.L.,30000011475,Transferencia,pagada,2026-07-17,2026-08-14,0119999662511356795987
-Alpha Trading S.A.,64,2026-07-15,Pampa Distribuciones S.R.L.,30000010428,Echeq,pendiente,,2026-08-14,
+Alpha Trading S.A.,64,2026-07-15,Quebrada Distribuciones S.R.L.,30000010428,Echeq,pendiente,,2026-08-14,
 Gamma Logistics S.R.L.,74,2026-07-15,Andes Insumos S.A.,30000010843,Transferencia,pagada,2026-07-17,2026-08-14,0179999821650860755508
 Gamma Logistics S.R.L.,75,2026-07-20,Patagonia Servicios S.A.S.,30000012179,Transferencia,pagada,2026-08-19,2026-07-20,0279999793175314952355
 Beta Foods S.A.,59,2026-07-20,Sierra Tecnologia S.A.,30000011408,Transferencia,pagada,2026-07-20,2026-07-27,0119999610577833033314
@@ -207,7 +207,7 @@ Gamma Logistics S.R.L.,78,2026-07-24,Delta Consultoria S.R.L.,30000011823,Transf
 Alpha Trading S.A.,68,2026-07-27,Sierra Distribuciones S.A.,30000012595,Transferencia,pagada,2026-08-10,2026-08-03,0119999681475398813142
 Gamma Logistics S.R.L.,79,2026-07-27,Litoral Packaging S.A.,30000011688,Transferencia,pagada,2026-07-29,2026-08-11,0279999723870465862306
 Alpha Trading S.A.,69,2026-07-28,Sur Energia S.A.S.,30000010916,Echeq,pagada,2026-08-04,,
-Gamma Logistics S.R.L.,80,2026-07-30,Pampa Logistica S.R.L.,30000012102,Echeq,pagada,2026-08-13,2026-08-14,
+Gamma Logistics S.R.L.,80,2026-07-30,Quebrada Logistica S.R.L.,30000012102,Echeq,pagada,2026-08-13,2026-08-14,
 Alpha Trading S.A.,70,2026-07-31,Andes Seguros S.R.L.,30000012730,Efectivo,pagada,2026-08-02,2026-08-30,
 Beta Foods S.A.,61,2026-07-31,Litoral Packaging S.A.,30000011688,Transferencia,pagada,2026-08-07,,0279999723870465862306
 Gamma Logistics S.R.L.,81,2026-08-03,Andes Seguros S.A.S.,30000012382,Echeq,pagada,2026-08-05,2026-08-10,
@@ -284,7 +284,7 @@ Gamma Logistics S.R.L.,107,2026-10-15,Sierra Distribuciones S.A.S.,30000011548,T
 Beta Foods S.A.,90,2026-10-16,Mar Energia S.R.L.,30000011059,Echeq,pagada,2026-10-23,,
 Alpha Trading S.A.,87,2026-10-19,Sur Alimentos S.R.L.,30000012528,Pago online,pagada,2026-11-18,2026-10-19,
 Gamma Logistics S.R.L.,108,2026-10-19,Delta Consultoria S.A.,30000011199,Transferencia,pagada,2026-10-21,2026-11-03,0179999821192530542606
-Beta Foods S.A.,91,2026-10-20,Pampa Logistica S.R.L.,30000012102,Transferencia,pagada,2026-10-20,2026-10-20,0119999647687711579910
-Beta Foods S.A.,92,2026-10-20,Pampa Transporte S.R.L.,30000011750,Echeq,pagada,2026-11-03,2026-11-19,
+Beta Foods S.A.,91,2026-10-20,Quebrada Logistica S.R.L.,30000012102,Transferencia,pagada,2026-10-20,2026-10-20,0119999647687711579910
+Beta Foods S.A.,92,2026-10-20,Quebrada Transporte S.R.L.,30000011750,Echeq,pagada,2026-11-03,2026-11-19,
 Alpha Trading S.A.,,2026-10-20,Sierra Alimentos S.A.,30000010002,Transferencia,pendiente,,,
 Beta Foods S.A.,,2026-10-20,Mar Alimentos S.A.S.,30000010079,Transferencia,pendiente,,,

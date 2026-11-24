@@ -30,7 +30,7 @@ BANKS = [('007', 'Banco Galicia'), ('011', 'Banco Nacion'), ('014', 'Banco Provi
          ('017', 'Banco BBVA'), ('027', 'Banco Supervielle'), ('072', 'Banco Santander')]
 PAYMENT_METHODS = ['Transferencia', 'Echeq', 'Efectivo', 'Pago online']
 STATUSES = ['pendiente', 'pagada', 'anulada']
-WORDS_A = ['Andes', 'Pampa', 'Delta', 'Sur', 'Norte', 'Litoral', 'Cuyo', 'Atlantico', 'Patagonia', 'Rio', 'Sierra', 'Mar']
+WORDS_A = ['Andes', 'Quebrada', 'Delta', 'Sur', 'Norte', 'Litoral', 'Cuyo', 'Atlantico', 'Patagonia', 'Rio', 'Sierra', 'Mar']
 WORDS_B = ['Logistica', 'Alimentos', 'Servicios', 'Insumos', 'Packaging', 'Tecnologia', 'Seguros', 'Mantenimiento',
            'Distribuciones', 'Energia', 'Consultoria', 'Transporte']
 SUFFIXES = ['S.A.', 'S.R.L.', 'S.A.S.']
@@ -39,7 +39,7 @@ CONCEPTS = ['Monthly service', 'Goods delivery', 'Maintenance', 'Insurance premi
 
 
 def fake_cuit(n: int) -> str:
-    first_ten = f'30{n:08d}'            # 30-0000NNNN: low range, not used by real companies
+    first_ten = f'30{n:08d}'            # 30-0000NNNN: low range, unlikely to be assigned to a real company
     return first_ten + str(cuit_check_digit(first_ten))
 
 
