@@ -1,12 +1,13 @@
 # Data model
 
-Three schemas in one PostgreSQL database:
+Four schemas in one PostgreSQL database:
 
 | Schema | Purpose |
 |---|---|
 | `pagos` | Normalised operational model: payment orders, third parties, bank accounts, invoices, cost centres. |
 | `tesoreria` | Bank movements (income and expenses) with an idempotent load key. |
 | `bi` | Flat, stable views for dashboards. BI tools connect only here. |
+| `audit` | Traceability: change history (by trigger), ETL run log, content hashes for the incremental load, quarantined rows. See [ARCHITECTURE.md](ARCHITECTURE.md#4-the-audit-trail). |
 
 ## Entity-relationship diagram (`pagos`)
 
@@ -27,6 +28,18 @@ erDiagram
     ORDEN_PAGO ||--o{ ORDEN_PAGO_HISTORIAL : "logs status changes"
     ORDEN_PAGO ||--o{ ADJUNTO : "has files"
 ```
+
+## Audit schema (`audit`)
+
+| Object | Purpose |
+|---|---|
+| `change_log` | Append-only history of every insert, update and delete on `orden_pago`, `orden_pago_detalle`, `tercero`, `comprobante` and `cuenta_bancaria`: old and new row as JSON, changed columns, actor and run. |
+| `load_run` | One row per ETL execution (also dry-runs and failures): mode, source, source hash, status, counts, error. |
+| `source_row` | Content hash of every order already loaded; an unchanged hash means the row is skipped. |
+| `rejected_row` | Quarantine: source file, line number, reason and the raw row. |
+| `v_order_change_log`, `v_rejected_row` | What the API may read: orders and their lines only, and the quarantine without bank details (`db/06_api_role.sql`). |
+
+`pagos.orden_pago_historial` (business status changes) is separate from `audit.change_log` (technical trace of every column) on purpose.
 
 ## Glossary (Argentine terms used as identifiers)
 
@@ -55,3 +68,5 @@ erDiagram
 
 `db/tests/data_quality.sql` returns, for each rule, the number of rows that break it. All must be zero:
 paid date only on paid OPs, every OP has lines and history, last history status equals the OP status, CBU bank equals the account bank, OP account and invoices belong to the OP supplier, no repeated aliases, only suppliers are paid, no repeated OP number per company, cost centre belongs to the OP company, and the treasury running balance matches the movements.
+
+Three more rules cover the audit schema (16 in total): every OP has an `INSERT` in the change log, no ETL run is left open for more than an hour, and every quarantined row names a reason and keeps its raw values.
