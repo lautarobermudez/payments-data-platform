@@ -50,3 +50,63 @@ def normalize_name(name: str) -> str:
     s = unicodedata.normalize('NFKD', str(name or '')).encode('ascii', 'ignore').decode()
     s = re.sub(r'[^A-Za-z0-9 ]+', ' ', s).upper()
     return re.sub(r'\s+', ' ', s).strip()
+
+
+# ---------------------------------------------------------------------------
+# Row-level rules for the incremental loader (pure: no database).
+# ---------------------------------------------------------------------------
+import datetime as _dt  # noqa: E402
+from decimal import Decimal, InvalidOperation  # noqa: E402
+
+
+def is_iso_date(value) -> bool:
+    try:
+        _dt.date.fromisoformat(str(value))
+        return True
+    except ValueError:
+        return False
+
+
+def order_problems(order: dict, lines: list, *, company_known: bool, supplier_known: bool,
+                   methods, statuses) -> list:
+    """Every reason why a payment order (header + lines) must be quarantined; an empty list means it is valid.
+
+    `order` and `lines` are the CSV rows as dictionaries. The caller says whether the company and the supplier
+    were found, because that depends on the database.
+    """
+    problems = []
+    if not company_known:
+        problems.append('unknown company')
+    if order.get('forma_pago') not in methods:
+        problems.append(f'unknown payment method {order.get("forma_pago")!r}')
+    if order.get('estado') not in statuses:
+        problems.append(f'unknown status {order.get("estado")!r}')
+    if not supplier_known:
+        problems.append('supplier not loaded')
+    if not lines:
+        problems.append('OP without lines')
+    for field in ('fecha_op', 'fecha_pago', 'fecha_vencimiento'):
+        if order.get(field) and not is_iso_date(order[field]):
+            problems.append(f'invalid date in {field}')
+    if not order.get('fecha_op'):
+        problems.append('missing fecha_op')
+    if order.get('estado') != 'pagada' and order.get('fecha_pago'):
+        problems.append(f'{order.get("estado")} OP with a payment date')
+    if order.get('estado') == 'pagada' and not order.get('fecha_pago'):
+        problems.append('paid OP without a payment date')
+    seen = set()
+    for line in lines:
+        try:
+            amount = Decimal(str(line.get('importe')))
+        except InvalidOperation:
+            problems.append(f'invalid line amount {line.get("importe")!r}')
+            continue
+        if amount == 0:
+            problems.append('line with a zero amount')
+        number = line.get('renglon')
+        if not str(number).isdigit() or int(number) < 1:
+            problems.append(f'invalid line number {number!r}')
+        elif number in seen:
+            problems.append(f'duplicate line number {number}')
+        seen.add(number)
+    return problems
