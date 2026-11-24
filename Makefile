@@ -1,12 +1,12 @@
-# Usage: make up init seed load deltas load-deltas test      (needs Docker, psql and Python 3.10+)
+# Usage: make up init seed load deltas load-deltas api test      (needs Docker, psql and Python 3.10+)
 export DATABASE_URL ?= postgresql://payments:payments@localhost:5432/payments
 PY ?= python3
 
 up:            ## start PostgreSQL in Docker
 	docker compose up -d --wait
 
-init:          ## create schemas, tables, views and the audit trail
-	for f in db/01_schema.sql db/02_views.sql db/03_bi_views.sql db/04_treasury.sql db/05_audit.sql; do \
+init:          ## create schemas, tables, views, the audit trail and the read-only API role
+	for f in db/01_schema.sql db/02_views.sql db/03_bi_views.sql db/04_treasury.sql db/05_audit.sql db/06_api_role.sql; do \
 	  psql "$(DATABASE_URL)" -v ON_ERROR_STOP=1 -q -f $$f || exit 1; done
 
 seed:          ## generate the fictitious dataset (deterministic)
@@ -25,10 +25,13 @@ load-deltas:   ## load the incremental file sets (dry-run, then commit); delta 2
 	  $(PY) etl/load_seed.py --source seed/deltas/delta_$$n || exit 1; \
 	  $(PY) etl/load_seed.py --source seed/deltas/delta_$$n --apply || exit 1; done
 
+api:           ## run the read-only REST API on http://127.0.0.1:8000 (interactive docs at /docs)
+	API_DATABASE_URL=$${API_DATABASE_URL:-postgresql://api_reader:api_reader@localhost:5432/payments} $(PY) -m uvicorn api.main:app --port 8000
+
 test:          ## unit tests + data-quality rules + incremental-load integration tests
 	$(PY) -m unittest discover -s tests -v
 
 reset:         ## drop everything and start over
 	docker compose down -v
 
-.PHONY: up init seed load deltas load-deltas test reset
+.PHONY: up init seed load deltas load-deltas api test reset

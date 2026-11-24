@@ -31,7 +31,7 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Create schema and views
         run: |
-          for f in db/01_schema.sql db/02_views.sql db/03_bi_views.sql db/04_treasury.sql db/05_audit.sql; do
+          for f in db/01_schema.sql db/02_views.sql db/03_bi_views.sql db/04_treasury.sql db/05_audit.sql db/06_api_role.sql; do
             psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -q -f "$f"
           done
       - name: Regenerate the seed and the incremental file sets and check they match the committed files
@@ -56,5 +56,14 @@ jobs:
         run: |
           psql "$DATABASE_URL" -c "SELECT mode, status, counts FROM audit.load_run ORDER BY started_at"
           psql "$DATABASE_URL" -c "SELECT reason, count(*) FROM audit.rejected_row GROUP BY reason"
+      - name: Start the API and call it (the contract is published at /openapi.json)
+        run: |
+          API_DATABASE_URL=postgresql://api_reader:api_reader@localhost:5432/payments \
+            uvicorn api.main:app --port 8000 &
+          for i in $(seq 1 20); do curl -fs localhost:8000/health && break; sleep 1; done
+          curl -fs "localhost:8000/orders?status=pendiente&limit=2"
+          curl -fs "localhost:8000/payables/aging?as_of=2026-11-01"
+          curl -fs "localhost:8000/runs?status=succeeded_with_rejects"
+          curl -fs localhost:8000/openapi.json > /dev/null
       - name: Unit tests and data-quality rules
         run: python -m unittest discover -s tests -v

@@ -15,7 +15,8 @@ import psycopg
 from psycopg.conninfo import conninfo_to_dict, make_conninfo
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-INIT_FILES = ['db/01_schema.sql', 'db/02_views.sql', 'db/03_bi_views.sql', 'db/04_treasury.sql', 'db/05_audit.sql']
+INIT_FILES = ['db/01_schema.sql', 'db/02_views.sql', 'db/03_bi_views.sql', 'db/04_treasury.sql', 'db/05_audit.sql',
+              'db/06_api_role.sql']
 LOADER = ROOT / 'etl' / 'load_seed.py'
 BASE_URL = os.environ.get('DATABASE_URL')
 
