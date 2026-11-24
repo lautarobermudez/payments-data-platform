@@ -49,4 +49,15 @@ SELECT 'treasury: running balance consistent with movements', count(*)
 FROM (SELECT cuenta_id, orden, saldo,
              saldo - lag(saldo) OVER (PARTITION BY cuenta_id ORDER BY orden) AS delta, importe
       FROM tesoreria.movimientos) m
-WHERE m.delta IS NOT NULL AND m.delta <> m.importe;
+WHERE m.delta IS NOT NULL AND m.delta <> m.importe
+UNION ALL
+SELECT 'audit: every OP has an INSERT in the change log', count(*)
+FROM pagos.orden_pago o
+WHERE NOT EXISTS (SELECT 1 FROM audit.change_log c
+                  WHERE c.table_name = 'pagos.orden_pago' AND c.record_id = o.id AND c.operation = 'INSERT')
+UNION ALL
+SELECT 'audit: no ETL run left open for more than an hour', count(*)
+FROM audit.load_run WHERE finished_at IS NULL AND started_at < now() - interval '1 hour'
+UNION ALL
+SELECT 'audit: every quarantined row names a reason and keeps the raw values', count(*)
+FROM audit.rejected_row WHERE coalesce(reason, '') = '' OR raw = '{}'::jsonb;
