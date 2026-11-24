@@ -1,0 +1,16 @@
+empresa,nro_op,renglon,nro_comprobante,concepto,fecha,importe,centro_costo
+Alpha Trading S.A.,88,1,A-0001-00000486,Consulting fees,2026-10-27,301672.32,
+Beta Foods S.A.,76,1,A-0001-00000421,Insurance premium,2026-09-08,211858.39,Catering Division
+Beta Foods S.A.,76,2,A-0001-00000422,Insurance premium,2026-09-08,326916.37,Catering Division
+Beta Foods S.A.,25,1,A-0001-00000125,Maintenance,2026-03-12,41282.20,Catering Division
+Beta Foods S.A.,25,2,A-0001-00000126,Freight,2026-03-12,86011.19,Retail Division
+Alpha Trading S.A.,67,1,A-0001-00000349,Software licence,2026-07-22,1022528.79,
+Alpha Trading S.A.,90,1,A-0001-00000496,Goods delivery,2026-11-03,201473.76,
+Beta Foods S.A.,95,1,A-0001-00000497,Goods delivery,2026-11-04,477499.06,
+Gamma Logistics S.R.L.,111,1,A-0001-00000498,Utilities,2026-11-05,16376.58,
+Alpha Trading S.A.,91,1,A-0001-00000499,Goods delivery,2026-11-06,18184.44,
+Beta Foods S.A.,96,1,A-0001-00000500,Utilities,2026-11-07,291372.33,
+Alpha Trading S.A.,89,1,A-0001-00000490,Freight,2026-10-30,66486.73,
+Alpha Trading S.A.,89,2,A-0001-00000491,Cleaning,2026-10-30,157725.56,
+Alpha Trading S.A.,92,1,A-0001-00000501,Consulting fees,2026-11-03,48000.00,
+Beta Foods S.A.,97,1,A-0001-00000502,Freight,2026-11-03,31500.00,

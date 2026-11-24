@@ -1,0 +1,13 @@
+empresa,nro_op,fecha_op,proveedor,cuit,forma_pago,estado,fecha_pago,fecha_vencimiento,cbu
+Alpha Trading S.A.,88,2026-10-27,Litoral Seguros S.R.L.,30000012315,Echeq,pagada,2026-11-03,2026-11-11,
+Beta Foods S.A.,76,2026-09-08,Sierra Tecnologia S.A.,30000011408,Echeq,pagada,2026-09-11,2026-09-08,
+Beta Foods S.A.,25,2026-03-12,Cuyo Alimentos S.R.L.,30000010355,Transferencia,pagada,2026-03-19,,0279999776611605372493
+Alpha Trading S.A.,67,2026-07-22,Patagonia Servicios S.A.S.,30000012179,Echeq,pendiente,,2026-07-22,
+Alpha Trading S.A.,90,2026-11-03,Sierra Transporte S.A.,30000011335,Transferencia,pendiente,,2026-11-18,0279999756933292828326
+Beta Foods S.A.,95,2026-11-04,Norte Servicios S.A.,30000010282,Echeq,pendiente,,2026-11-19,
+Gamma Logistics S.R.L.,111,2026-11-05,Delta Consultoria S.R.L.,30000011823,Efectivo,pendiente,,2026-11-20,
+Alpha Trading S.A.,91,2026-11-06,Delta Consultoria S.A.,30000011199,Echeq,pendiente,,2026-11-21,
+Beta Foods S.A.,96,2026-11-07,Sur Mantenimiento S.A.S.,30000010215,Echeq,pendiente,,2026-11-22,
+Alpha Trading S.A.,89,2026-10-30,Sierra Alimentos S.A.,30000010002,Transferencia,pendiente,,2026-11-14,0119999634533850088621
+Alpha Trading S.A.,92,2026-11-03,Unknown Supplier S.A.,30000099993,Transferencia,pendiente,,,
+Beta Foods S.A.,97,2026-11-03,Sierra Alimentos S.A.,30000010002,Echeq,pendiente,2026-11-05,,

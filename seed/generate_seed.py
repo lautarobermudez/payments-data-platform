@@ -7,6 +7,9 @@ The same seed always produces the same files, so results in the docs can be repr
 
     python seed/generate_seed.py            # writes seed/data/*.csv
     python seed/generate_seed.py --seed 7   # a different but equally reproducible dataset
+    python seed/generate_seed.py --delta 1  # writes seed/deltas/delta_1/*.csv: an incremental file set
+                                            # (new orders, orders that got paid, a corrected amount); delta 2
+                                            # also carries two invalid rows on purpose to show the quarantine
 """
 import argparse
 import csv
@@ -40,19 +43,129 @@ def fake_cuit(n: int) -> str:
     return first_ten + str(cuit_check_digit(first_ten))
 
 
-def write(name, header, rows):
-    OUT.mkdir(parents=True, exist_ok=True)
-    with open(OUT / name, 'w', newline='', encoding='utf-8') as f:
+def write(name, header, rows, out=None):
+    out = out or OUT
+    out.mkdir(parents=True, exist_ok=True)
+    with open(out / name, 'w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
         w.writerow(header)
         w.writerows(rows)
-    print(f'{name}: {len(rows)} rows')
+    print(f'{out.name}/{name}: {len(rows)} rows')
+
+
+ORDER_HEADER = ['empresa', 'nro_op', 'fecha_op', 'proveedor', 'cuit', 'forma_pago', 'estado',
+                'fecha_pago', 'fecha_vencimiento', 'cbu']
+LINE_HEADER = ['empresa', 'nro_op', 'renglon', 'nro_comprobante', 'concepto', 'fecha', 'importe', 'centro_costo']
+
+
+def read_rows(path):
+    if not path.exists():
+        return []
+    with open(path, newline='', encoding='utf-8') as f:
+        return list(csv.reader(f))[1:]
+
+
+def current_state(delta_n, out_dir):
+    """Orders and lines as they stand after the baseline and the deltas before `delta_n`:
+    {(company, number): order row} and {(company, number): [line rows]}."""
+    orders, lines = {}, {}
+    folders = [OUT] + [out_dir.parent / f'delta_{k}' for k in range(1, delta_n)]
+    for folder in folders:
+        for row in read_rows(folder / 'payment_orders.csv'):
+            if row[3].startswith('Unknown Supplier') or (row[6] != 'pagada' and row[7]):
+                continue                      # the deliberately invalid rows of an earlier delta were never loaded
+            orders[(row[0], row[1])] = row
+        grouped = {}
+        for row in read_rows(folder / 'payment_order_lines.csv'):
+            grouped.setdefault((row[0], row[1]), []).append(row)
+        for key, rows in grouped.items():
+            if key in orders:
+                lines[key] = rows
+    return orders, lines
+
+
+def generate_delta(n, out_dir, seed):
+    """An incremental file set. Deterministic: the same (seed, n) always gives the same files."""
+    rnd = random.Random(seed * 1000 + n)
+    orders, lines = current_state(n, out_dir)
+    suppliers = [(r[0], r[1]) for r in read_rows(OUT / 'suppliers.csv')]
+    cbu_of = {r[0]: r[3] for r in read_rows(OUT / 'bank_accounts.csv')}
+    numbered = [k for k in orders if k[1]]
+    next_number = {c: max(int(k[1]) for k in numbered if k[0] == c) + 1 for c in COMPANIES}
+    invoice_seq = max(int(line[3].rsplit('-', 1)[1]) for rows in lines.values() for line in rows if line[3].startswith('A-0001-'))
+
+    out_orders, out_lines = [], []
+
+    def emit(order_row, line_rows):
+        out_orders.append(order_row)
+        out_lines.extend(line_rows)
+
+    # 1) orders that were pending and are now paid, and one whose first line amount is corrected
+    pending = sorted(k for k, r in orders.items() if k[1] and r[6] == 'pendiente')
+    chosen = rnd.sample(pending, (4 if n == 1 else 3) + 1)
+    for key in chosen[:-1]:
+        row = list(orders[key])
+        paid_on = dt.date.fromisoformat(row[2]) + dt.timedelta(days=rnd.choice([1, 3, 7]))
+        row[6], row[7] = 'pagada', paid_on.isoformat()
+        emit(row, [list(x) for x in lines[key]])
+    fixed = [list(x) for x in lines[chosen[-1]]]
+    fixed[0][6] = f'{round(float(fixed[0][6]) * 1.1, 2):.2f}'
+    emit(list(orders[chosen[-1]]), fixed)
+
+    # 2) brand-new orders after the last day of the baseline
+    base_day = END + dt.timedelta(days=7 * n)
+    for i in range(6 if n == 1 else 5):
+        company = COMPANIES[i % len(COMPANIES)]
+        supplier = rnd.choice(suppliers)
+        method = rnd.choices(PAYMENT_METHODS, weights=[6, 3, 1, 1])[0]
+        day = base_day + dt.timedelta(days=i)
+        paid = rnd.random() < 0.25
+        number = next_number[company]
+        next_number[company] += 1
+        new_lines = []
+        for line_no in range(1, rnd.choice([1, 2]) + 1):
+            invoice_seq += 1
+            new_lines.append([company, number, line_no, f'A-0001-{invoice_seq:08d}', rnd.choice(CONCEPTS), day.isoformat(),
+                              f'{round(rnd.lognormvariate(11.5, 1.0), 2):.2f}', ''])
+        emit([company, number, day.isoformat(), supplier[0], supplier[1], method, 'pagada' if paid else 'pendiente',
+              day.isoformat() if paid else '', (day + dt.timedelta(days=15)).isoformat(),
+              cbu_of[supplier[1]] if method == 'Transferencia' else ''], new_lines)
+
+    if n >= 2:
+        # 3) an order that already came in delta 1, repeated as it was: the loader must see it as unchanged
+        again_key = sorted(k for k, r in orders.items() if k[1] and r[2] > END.isoformat() and k not in chosen)[0]
+        emit(list(orders[again_key]), [list(x) for x in lines[again_key]])
+        # 4) two rows that must go to quarantine: a supplier whose tax id has a wrong check digit, and an unpaid OP with a payment date
+        bad_cuit = fake_cuit(9999)[:-1] + str((int(fake_cuit(9999)[-1]) + 1) % 10)
+        company = COMPANIES[0]
+        number = next_number[company]
+        next_number[company] += 1
+        invoice_seq += 1
+        emit([company, number, base_day.isoformat(), 'Unknown Supplier S.A.', bad_cuit, 'Transferencia', 'pendiente', '', '', ''],
+             [[company, number, 1, f'A-0001-{invoice_seq:08d}', 'Consulting fees', base_day.isoformat(), '48000.00', '']])
+        company = COMPANIES[1]
+        number = next_number[company]
+        next_number[company] += 1
+        invoice_seq += 1
+        supplier = suppliers[0]
+        emit([company, number, base_day.isoformat(), supplier[0], supplier[1], 'Echeq', 'pendiente',
+              (base_day + dt.timedelta(days=2)).isoformat(), '', ''],
+             [[company, number, 1, f'A-0001-{invoice_seq:08d}', 'Freight', base_day.isoformat(), '31500.00', '']])
+
+    write('payment_orders.csv', ORDER_HEADER, out_orders, out_dir)
+    write('payment_order_lines.csv', LINE_HEADER, out_lines, out_dir)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--seed', type=int, default=42)
+    ap.add_argument('--delta', type=int, metavar='N', help='write the incremental file set number N instead of the full dataset')
+    ap.add_argument('--out', type=pathlib.Path, help='folder for --delta (default: seed/deltas/delta_N)')
     args = ap.parse_args()
+    if args.delta:
+        out_dir = (args.out or OUT.parent / 'deltas' / f'delta_{args.delta}').resolve()
+        generate_delta(args.delta, out_dir, args.seed)
+        return
     rnd = random.Random(args.seed)
 
     # ---- suppliers (with one alias each for ~20%) and their bank accounts
